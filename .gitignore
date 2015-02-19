@@ -1,0 +1,13 @@
+/src/*.pyc
+/data/artists/**
+/data/from_links/**
+/data/networks/**
+/data/popularity/**
+/data/prob/**
+/data/random/**
+/data/readable/**
+/data/to_links/**
+/data/unreadable/**
+/data/xml_artists/**
+
+
