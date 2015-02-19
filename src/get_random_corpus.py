@@ -4,6 +4,7 @@ from artist import Artist
 import os
 from collections import Counter
 from cleaners import fix_punct, clean_for_words, list_in
+from artist import Artist 
 import sys
 import get_random_articles
 
@@ -40,7 +41,7 @@ def main():
 	print "Getting corpus of words from random articles."
 	if len(sys.argv) > 1 and sys.argv[1] == 'new':
 		print "Getting words."
-		artists = init_scrape.gen_artists(open(init_scrape.CLEAN,'r').read().split("\n"))
+		artists = Artist.gen_artists(open(init_scrape.CLEAN,'r').read().split("\n"))
 		r_words = write(artists).split("\n")
 	else:
 		r_words = open(RANDOM_WORDS,'r').read().split("\n")

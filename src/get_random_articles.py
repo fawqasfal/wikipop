@@ -1,6 +1,7 @@
 import init_scrape
 import requests
 from cleaners import list_in, fix_punct
+from artist import Artist
 RANDOM_ARTICLES = "../data/readable/random_articles.txt"
 MAX = 10
 def get_random_article_names(limit):
@@ -32,7 +33,7 @@ def good_article_names(limit, artists):
 	return answer
 
 def main():
-	artists = init_scrape.gen_artists(open(init_scrape.CLEAN,'r').read().split("\n"))
+	artists = Artist.gen_artists(open(init_scrape.CLEAN,'r').read().split("\n"))
 	articles = good_article_names(len(artists), artists)
 	return articles
 

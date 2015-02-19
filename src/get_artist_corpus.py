@@ -4,6 +4,7 @@ from artist import Artist
 import os
 from collections import Counter
 from cleaners import fix_punct, clean_for_words
+from artist import Artist 
 
 START = '<extract xml:space="preserve">'
 ARTIST_CORPUS = "../data/readable/artist_corpus.txt"
@@ -25,7 +26,7 @@ def write(artists):
 
 def main():
 	print "Getting corpus of artist words."
-	artists = init_scrape.gen_artists(open(init_scrape.CLEAN,'r').read().split("\n"))
+	artists = Artist.gen_artists(open(init_scrape.CLEAN,'r').read().split("\n"))
 	a_words = write(artists).split("\n")
 	print "Making frequency table."
 	a_dict = Counter(a_words)

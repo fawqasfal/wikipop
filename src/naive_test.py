@@ -4,9 +4,10 @@ import get_artist_corpus
 import get_random_articles
 import requests
 from cleaners import clean_for_words
+from artist import Artist
 
 START = '<extract xml:space="preserve">'
-artists = init_scrape.gen_artists(open(init_scrape.CLEAN,'r').read().split("\n"))
+artists = Artist.gen_artists(open(init_scrape.CLEAN,'r').read().split("\n"))
 randoms = open(get_random_articles.RANDOM_ARTICLES,'r').read().split("\n")
 a_file = "../data/readable/a_words.txt"
 r_file = "../data/readable/r_words.txt"

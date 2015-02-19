@@ -4,7 +4,6 @@ from BeautifulSoup import BeautifulSoup
 import types
 import os
 import random
-from artist import Artist
 from cleaners import *
 SIZE = 100
 INIT_LIST = "Lists_of_musicians"
@@ -121,9 +120,6 @@ def right_section(line):
 	#this is decades; ex. 1960s
 	return let_range or num_range or three_range or five_range or year_eq
 
-def gen_artists(artists):
-	#this gets all the article data from the artists and weeds out red links that lead to missing articles
-	return [Artist(artist) for artist in artists if not red(Artist(artist))]
 
 def get_data():
 	folders = ["../data/to_links/", "../data/from_links/", "../data/popularity/", "../data/networks/","../data/prob/"]

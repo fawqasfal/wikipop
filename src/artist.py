@@ -1,6 +1,6 @@
 import requests 
 import os 
-from cleaners import fix_punct, clean_data, red 
+from cleaners import fix_punct, clean_data, red
 import operator
 START = '<extract xml:space="preserve">'
 
@@ -33,25 +33,6 @@ class Artist(object):
 		#will contain all the XML data for this artist's article. unix filenames cannot have '/'
 		self.memo = "" #saved string of article data
 		self.get_data()
-
-	"""@classmethod
-	def artist_dict(cls):
-		if os.path.isfile(Artist.DICT_FILE):
-			dict_txt = open(Artist.DICT_FILE,'r').read().split("\n")
-			keys = [dict_txt[i] for i in range(0,len(dict_txt) - 1,2)]
-			values = [dict_txt[i] for i in range(1,len(dict_txt),2)]
-			l = []
-			for i in range(len(values)):
-				l[i] = (keys[i], values[i])
-			return {key: value for (key, value) in l}
-		artist_txt = open("../data/readable/final_clean_data.txt",'r').read().split("\n")
-		artists = [Artist(artist) for artist in artist_txt if not red(Artist(artist))]
-		sorted(artists)
-		final_dict = {chr(alph):[] for alph in xrange(ord('A'),ord('Z') + 1)}
-		final_dict['NONE'] = []
-		for artist in artists:
-				final_dict[dict_index(artist.name)].append(artist.name)
-		return final_dict"""
 
 	def get_data(self):
 		if self.memo != "":
@@ -159,4 +140,10 @@ class Artist(object):
 					open(artist_obj.pop_file,'w').write(str(final_pop))
 			pop_dict = {key:temp_dict[key] for key in temp_dict.keys()}
 		return pop_dict
+	
+	@classmethod
+	def gen_artists(cls, artists):
+		#this gets all the article data from the artists and weeds out red links that lead to missing articles
+		return [Artist(artist) for artist in artists if not red(Artist(artist))]
+
 
