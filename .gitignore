@@ -1,13 +1,13 @@
 /src/*.pyc
-/data/artists/**
-/data/from_links/**
-/data/networks/**
-/data/popularity/**
-/data/prob/**
-/data/random/**
-/data/readable/**
-/data/to_links/**
-/data/unreadable/**
-/data/xml_artists/**
+/data/artists/*.txt
+/data/from_links/*.txt
+/data/networks/*.txt
+/data/popularity/*.txt
+/data/prob/*.txt
+/data/random/*.txt
+/data/readable/*.txt
+/data/to_links/*.txt
+/data/unreadable/*.txt
+/data/xml_artists/*.txt
 
 
