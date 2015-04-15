@@ -1,6 +1,6 @@
 import init_scrape
 from artist import Artist
-artists = init_scrape.gen_artists(open(init_scrape.CLEAN,'r').read().split("\n"))
+artists = Artist.gen_artists(open(init_scrape.CLEAN,'r').read().split("\n"))
 TOP = 100
 
 pops = Artist.get_pops()
