@@ -137,7 +137,12 @@ class Artist(object):
 					temp_dict[artist] = 0
 					print artist + " has no incoming links. His/her/their popularity score has been set to 0."
 				if time == Artist.ITER - 1:
-					open(artist_obj.pop_file,'w').write(str(final_pop))
+					try:
+						open(artist_obj.pop_file,'w').write(str(final_pop))
+					except NameError: 
+						ranks = [pop_dict[link_artist] / Artist(link_artist).size_to_links() for link_artist in artist_obj.get_from_links()]
+						final_pop = sum(ranks)
+						open(artist_obj.pop_file, 'w').write(str(final_pop))
 			pop_dict = {key:temp_dict[key] for key in temp_dict.keys()}
 		return pop_dict
 	
