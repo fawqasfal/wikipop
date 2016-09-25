@@ -126,7 +126,7 @@ def get_data():
 	for folder in folders:
 		for filename in os.listdir(folder):
 			file_path = os.path.join(folder, filename)
-			if os.path.isfile(file_path):
+			if os.path.isfile(file_path) and filename != ".keep":
 				try:
 					os.unlink(file_path)
 				except Exception, e:
