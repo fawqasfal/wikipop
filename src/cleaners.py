@@ -55,7 +55,7 @@ def bad_section(line):
 
 def artist_filter(artist):
 	#Some articles don't follow the pattern. Manually filtering out 
-	not_in = ["Image:", "File:", ".jpg", "Special:", "User:", "Category:", "http://", "meta:", "help:", "Help:", "album)"]
+	not_in = ["Image:", "File:", ".jpg", "Special:", "User:", "Category:", "http://", "meta:", "help:", "Help:", "album)", "song)"]
 	not_eq = ["violin", "musician", "singer", "songwriter", "singer-songwriter", "guitar", "keyboards", "England", "vocalist"]
 	for dont in not_in:
 		if dont in artist:

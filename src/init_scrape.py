@@ -5,7 +5,7 @@ import types
 import os
 import random
 from cleaners import *
-SIZE = 100
+SIZE = 4
 INIT_LIST = "Lists_of_musicians"
 LIST_OF_LISTS = "../data/readable/listoflists.txt" #raw HTML data of the INIT_LIST article
 SUBSET = "../data/readable/listoflists_cont.txt" #subset of the INIT_LIST, containing SIZE lists
@@ -122,10 +122,11 @@ def right_section(line):
 
 
 def get_data():
-	folders = ["../data/to_links/", "../data/from_links/", "../data/popularity/", "../data/networks/","../data/prob/"]
+	folder_header = "../data/"
+	folders = ["artists/", "random/", "readable/", "unreadable/", "xml_artists/", "to_links/", "from_links/", "popularity/", "networks/","prob/"]
 	for folder in folders:
-		for filename in os.listdir(folder):
-			file_path = os.path.join(folder, filename)
+		for filename in os.listdir(folder_header + folder):
+			file_path = os.path.join(folder_header + folder, filename)
 			if os.path.isfile(file_path) and filename != ".keep":
 				try:
 					os.unlink(file_path)

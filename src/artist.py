@@ -34,6 +34,7 @@ class Artist(object):
 		self.memo = "" #saved string of article data
 		self.get_data()
 
+
 	def get_data(self):
 		if self.memo != "":
 		#if self.memo exists, then all the data has already been collected, stored on the hard drive, and put in self.memo
@@ -76,6 +77,9 @@ class Artist(object):
 				print "New link! " + link
 				a_links[link] = x_data.count(link)
 				print x_data.count(link)
+		if self.name in a_links.keys():
+			print "Removed a self-reference : " + self.name
+			del a_links[self.name] 
 		for link in a_links.keys():
 			from_file_name = "../data/from_links/" + link.replace('/','\\') + '.txt'
 			if isinstance(a_links[link], int):
@@ -109,7 +113,6 @@ class Artist(object):
 		if list_form == ['']:
 			return {}
 		list_form.remove('')
-
 		return {line.rsplit(",",1)[0]:int(line.rsplit(",",1)[1]) for line in list_form}
 
 	def size_from_links(self):
@@ -121,13 +124,15 @@ class Artist(object):
 	@classmethod
 	def get_pops(cls):
 		arr_artists = open("../data/readable/final_clean_data.txt",'r').read().split("\n")
-
+		artists_objs = [Artist(artist) for artist in arr_artists]
+		for artist in artists_objs:
+			artist.set_links()
+	
 		pop_dict = {artist: 1/float(Artist.LENGTH) for artist in arr_artists}
-
 		for time in range(Artist.ITER):
 			temp_dict = {key:pop_dict[key] for key in pop_dict.keys()}
-			for artist in arr_artists:
-				artist_obj = Artist(artist)
+			for artist_obj in artists_objs:
+				artist = artist_obj.name
 				if artist_obj.get_from_links() != -1:
 					ranks = [pop_dict[link_artist] / Artist(link_artist).size_to_links() for link_artist in artist_obj.get_from_links()]
 					final_pop = sum(ranks)
