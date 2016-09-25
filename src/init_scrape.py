@@ -5,7 +5,7 @@ import types
 import os
 import random
 from cleaners import *
-SIZE = 4
+SIZE = 200
 INIT_LIST = "Lists_of_musicians"
 LIST_OF_LISTS = "../data/readable/listoflists.txt" #raw HTML data of the INIT_LIST article
 SUBSET = "../data/readable/listoflists_cont.txt" #subset of the INIT_LIST, containing SIZE lists
