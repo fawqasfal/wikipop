@@ -13,12 +13,25 @@ SECTIONS = "../data/unreadable/allpages.txt" #raw xml data of the sections of th
 UNCLEAN = "../data/unreadable/final_data.txt" #raw data of artist names 
 CLEAN = "../data/readable/final_clean_data.txt" #cleaned data of artist names
 HEADER = "https://en.wikipedia.org/w/api.php?" #header string for all API calls
-BANNED = ["List of fictional music groups", "List of best-selling girl groups", "music genre", "musician",
-		  "Category:Lists of musicians", "Category:Lists of lists", "List of American grunge bands", "List of post-grunge bands"] 
-#These articles are BANNED because they give us a significant amount of undetectable garbage.
+BANNED = ["List of fictional music groups", "List of best-selling girl groups", "music genre", "musician", 
+		 "Lists of people by occupation", "Category:Lists of musicians", "Category:Lists of lists", "List of American grunge bands", 
+		 "List of post-grunge bands"] 
+#These articles are BANNED because they give us a significant amount of undetectable garbage that still passes the script.
+
 BAD = ["List_of_musicians_from_Quebec","List_of_blues_musicians","List_of_symphony_orchestras_in_the_United_States", 
 	   "List_of_musicians_who_play_left-handed", "List_of_Iranian_composers", "List_of_singer-songwriters",
-	   "List_of_Carnatic_artists"]
+	   "List_of_Carnatic_artists", "List_of_classical_guitartists", "List_of_Swedish_hip_hop_musicians", "List_of_jazz_Lmusicians",
+	   "List_of_mandolinists_(sorted)", "List_of_Carnatic_instrumentalists", "List_of_Christian_ska_bands", 
+	   "List_of_Slovenian_musicians", "List_of_New_York_hardcore_bands", "List_of_Anglo-Quebecer_musicians", 
+	   "List_of_funk_rock_bands", "List_of_Latin_pop_artists", "List_of_American_female_country_singers", 
+	   "List_of_tenors_in_non-classical_music", "List_of_surf_musicians", "List_of_Norwegian_musicians", "List_of_minimalist_artists",
+	   "List_of_post-dubstep_musicians", "List_of_Britpop_musicians", "List_of_groove_metal_bands", "List_of_psychedelic_pop_artists",
+	   "List_of_psychedelic_rock_artists", "List_of_oboists", "List_of_Cornish_musicians", "List_of_Romanian_musicians",
+	   "List_of_glam_rock_artists", "List_of_reggaeton_musicians", "List_of_bands_from_British_Columbia", "List_of_radio_orchestras",
+	   "List_of_Winnipeg_musicians", "List_of_emo_artists", "List_of_Brazilian_musicians", "List_of_clarinetists", 
+	   "List_of_Christian_punk_bands", "List_of_grindcore_bands", "List_of_Swedes_in_music", "List_of_bands_from_the_San_Francisco_Bay_Area",
+	   "List_of_cellists"]
+#These articles have unconvential formatting, but luckily still can be comprehended by the script. 	   
 def init_lists(article):
 	#retrieves the initial list of genre lists using article with title "article" as the source. 
 	#Most probably going to be "Lists of musicians"
@@ -106,7 +119,7 @@ def right_section(line):
 	def isHyph(c):
 		return '-' in c or '&ndash;' in c or u'–' in c
 	#determines if a certain section contains artists or other miscallaneous information
-	#usually, sections that start with A-Z, 0-9 are going to contain artists who's names start with that character. 
+	#usually, sections that start with A-Z, 0-9, or A to Z are going to contain artists who's names start with that character. 
 	init = len(line) == 1
 	let_range = init and isAZ(line) #gets A through Z section names
 	num_range = init and is09(line) #gets 0 through 9 section names]
@@ -115,7 +128,7 @@ def right_section(line):
 	#gets A-Ls, Ms-Ns, 0-9s, etc. 
 	five_range = len(line) >= 5 and isAZ(line[0]) and low_case(line[1]) and isHyph(line[2:end - 1]) and isAZ(line[end - 1]) and low_case(line[end])
 	#gets Ab-Ads, Kl-Kys, etc.
-	year_eq = line.isdigit() and int(line) > 1700 and int(line) < 2014 #this is years; ex.: 1955
+	year_eq = line.isdigit() and len(line) <= 4 #this is years; ex.: 1955 ... will stop working in the year 10,000
 	year_eq = year_eq or (line[:end].isdigit() and line[end] == 's' and int(line[:end]) > 1700 and int(line[:end]) < 2014)  
 	#this is decades; ex. 1960s
 	return let_range or num_range or three_range or five_range or year_eq
@@ -123,7 +136,8 @@ def right_section(line):
 
 def get_data():
 	folder_header = "../data/"
-	folders = ["artists/", "random/", "readable/", "unreadable/", "xml_artists/", "to_links/", "from_links/", "popularity/", "networks/","prob/"]
+	folders = ["artists/", "random/", "readable/", "unreadable/", "xml_artists/", "to_links/", "from_links/", "popularity/", 
+	"networks/","prob/"]
 	for folder in folders:
 		for filename in os.listdir(folder_header + folder):
 			file_path = os.path.join(folder_header + folder, filename)

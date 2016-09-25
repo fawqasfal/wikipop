@@ -83,9 +83,7 @@ def clean_data(unclean, BANNED=[]):
 			line = line.replace("</span>","")
 		if line not in clean: #dont add duplicates
 			clean += line + "\n"
-	init_lists = "List of 1970s Christian pop artists" in clean 
-	if init_lists:
-		for banned in BANNED:
+	for banned in BANNED:
 			clean = clean.replace(banned + "\n","")
 	clean = clean[:len(clean) - 1] #last item is always empty \n. dont want it. 
 	return clean
