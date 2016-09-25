@@ -1,13 +1,25 @@
 /src/*.pyc
-/data/artists/*.txt
-/data/from_links/*.txt
-/data/networks/*.txt
-/data/popularity/*.txt
-/data/prob/*.txt
-/data/random/*.txt
-/data/readable/*.txt
-/data/to_links/*.txt
-/data/unreadable/*.txt
-/data/xml_artists/*.txt
+/data/artists/*
+/data/from_links/*
+/data/networks/*
+/data/popularity/*
+/data/prob/*
+/data/random/*
+/data/readable/*
+/data/to_links/*
+/data/unreadable/*
+/data/xml_artists/*
+
+!/data/artists/.keep
+!/data/from_links/.keep
+!/data/networks/.keep
+!/data/popularity/.keep
+!/data/prob/.keep
+!/data/random/.keep
+!/data/readable/.keep
+!/data/to_links/.keep
+!/data/unreadable/.keep
+!/data/xml_artists/.keep
+
 
 
